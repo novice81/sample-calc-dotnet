@@ -6,7 +6,7 @@ namespace SampleCalc.Core
     {
         public string Plus(string lh, string rh)
         {
-            return "XXX";
+            return (int.Parse(lh) + int.Parse(rh)).ToString();
         }
     }
 }
