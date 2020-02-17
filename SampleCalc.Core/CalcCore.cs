@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace SampleCalc.Core
 {
@@ -22,5 +23,30 @@ namespace SampleCalc.Core
             
             return new string(digitsSum);
         }
+
+        public byte[] ConvertToBytes(string number)
+        {
+            var digits = new byte[number.Length];
+
+            for (var i = 0; i < number.Length; ++i)
+            {
+                digits[i] = (byte)Char.GetNumericValue(number, i);
+            }
+
+            return digits;
+        }
+
+        public string ConvertToString(byte[] number)
+        {
+            var stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < number.Length; ++i)
+            {
+                stringBuilder.Append(number[i]);
+            }
+
+            return stringBuilder.ToString();
+        }
+
     }
 }
