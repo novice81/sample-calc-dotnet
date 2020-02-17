@@ -12,7 +12,19 @@ namespace SampleCalc.Tests
         {
             var calc = new CalcCore();
 
-            calc.Plus("1", "1").Should().Be("2");
+            for (int lh = 0; lh < 10; ++lh)
+            {
+                for (int rh = 0; rh < 10; ++rh)
+                {
+                    if (lh + rh > 10)
+                    {
+                        continue;
+                    }
+
+                    // Test only that sum is still single digit
+                    calc.Plus(lh.ToString(), rh.ToString()).Should().Be((lh + rh).ToString());
+                }
+            }
         }
 
         [Fact]
