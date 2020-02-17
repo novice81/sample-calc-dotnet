@@ -7,21 +7,19 @@ namespace SampleCalc.Core
     {
         public string Plus(string lh, string rh)
         {
-            var digitsLh = lh.ToCharArray();
-            var digitsRh = rh.ToCharArray();
+            var digitsLh = ConvertToBytes(lh);
+            var digitsRh = ConvertToBytes(rh);
 
             var digitLength = Math.Max(digitsLh.Length, digitsRh.Length);
-            var digitsSum = new char[digitLength];
+            var digitsSum = new byte[digitLength];
 
             for (var i = 0; i < digitLength; ++i)
             {
-                digitsSum[digitLength - i - 1] = (
-                        Convert.ToInt16(Char.GetNumericValue(digitsLh[digitLength - i - 1]))
-                        + Convert.ToInt16(Char.GetNumericValue(digitsRh[digitLength - i - 1])))
-                        .ToString().ToCharArray()[0];
+                digitsSum[digitLength - i - 1] = 
+                        (byte)(digitsLh[digitLength - i - 1] + digitsRh[digitLength - i - 1]);
             }
             
-            return new string(digitsSum);
+            return ConvertToString(digitsSum);
         }
 
         public byte[] ConvertToBytes(string number)
@@ -47,6 +45,5 @@ namespace SampleCalc.Core
 
             return stringBuilder.ToString();
         }
-
     }
 }
