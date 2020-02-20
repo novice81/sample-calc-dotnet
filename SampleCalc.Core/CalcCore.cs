@@ -25,11 +25,13 @@ namespace SampleCalc.Core
         {
             var digitLength = Math.Max(digitsLh.Length, digitsRh.Length);
             var digitsSum = new byte[digitLength];
+            var digitsCarry = new byte[digitLength + 1];
 
             for (var i = 0; i < digitLength; ++i)
             {
                 var sum = Plus(digitsLh[digitLength - i - 1], digitsRh[digitLength - i - 1]);
                 digitsSum[digitLength - i - 1] = (byte)sum.Number;
+                digitsCarry[digitLength - i] = sum.Carry;
             }
 
             return digitsSum;
