@@ -5,6 +5,12 @@ namespace SampleCalc.Core
 {
     public class CalcCore
     {
+        public struct Digit
+        {
+            public byte Number { get; set; }
+            public byte Carry { get; set; }
+        }
+
         public string Plus(string lh, string rh)
         {
             var digitsLh = ConvertToBytes(lh);
@@ -22,16 +28,22 @@ namespace SampleCalc.Core
 
             for (var i = 0; i < digitLength; ++i)
             {
-                digitsSum[digitLength - i - 1] = 
-                        (byte)Plus(digitsLh[digitLength - i - 1], digitsRh[digitLength - i - 1]);
+                var sum = Plus(digitsLh[digitLength - i - 1], digitsRh[digitLength - i - 1]);
+                digitsSum[digitLength - i - 1] = (byte)sum.Number;
             }
 
             return digitsSum;
         }
 
-        public byte Plus(byte digitLh, byte digitRh)
+        public Digit Plus(byte digitLh, byte digitRh)
         {
-            return digitLg + digitRh;
+            var sum = digitLh + digitRh;
+
+            return new Digit 
+            { 
+                Number = (byte)(sum >= 10 ? sum - 10 : sum),
+                Carry = (byte)(sum >= 10 ? 1 : 0),
+            };
         }
 
         public byte[] ConvertToBytes(string number)
