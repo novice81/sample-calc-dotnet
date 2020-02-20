@@ -10,6 +10,13 @@ namespace SampleCalc.Core
             var digitsLh = ConvertToBytes(lh);
             var digitsRh = ConvertToBytes(rh);
 
+            var digitsSum = Plus(digitsLh, digitsRh);
+            
+            return ConvertToString(digitsSum);
+        }
+
+        public byte[] Plus(byte[] digitsLh, byte[] digitsRh)
+        {
             var digitLength = Math.Max(digitsLh.Length, digitsRh.Length);
             var digitsSum = new byte[digitLength];
 
@@ -18,8 +25,8 @@ namespace SampleCalc.Core
                 digitsSum[digitLength - i - 1] = 
                         (byte)(digitsLh[digitLength - i - 1] + digitsRh[digitLength - i - 1]);
             }
-            
-            return ConvertToString(digitsSum);
+
+            return digitsSum;
         }
 
         public byte[] ConvertToBytes(string number)
