@@ -37,6 +37,11 @@ namespace SampleCalc.Core
             return digitsSum;
         }
 
+        public byte GetSafeNumber(byte[] array, int index)
+        {
+            return (byte)((index >= array.Length || index < 0) ? 0 : array[index]);
+        }
+
         public Digit Plus(byte digitLh, byte digitRh)
         {
             var sum = digitLh + digitRh;

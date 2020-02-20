@@ -36,6 +36,21 @@ namespace SampleCalc.Tests
         }
 
         [Fact]
+        public void Test_GetSafeNumber()
+        {
+            var calc = new CalcCore();
+
+            var array = new byte[3]{ 1, 2, 3 };
+
+            calc.GetSafeNumber(array, 0).Should().Be(1);
+            calc.GetSafeNumber(array, 1).Should().Be(2);
+            calc.GetSafeNumber(array, 2).Should().Be(3);
+
+            calc.GetSafeNumber(array, 3).Should().Be(0);
+            calc.GetSafeNumber(array, -1).Should().Be(0);
+        }
+
+        [Fact]
         public void Test_Convert_String_To_Bytes()
         {
             var calc = new CalcCore();
