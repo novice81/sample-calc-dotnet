@@ -28,6 +28,14 @@ namespace SampleCalc.Tests
         }
 
         [Fact]
+        public void Test_Plus_SingleDigit_Over_Carry()
+        {
+            var calc = new CalcCore();
+
+            calc.Plus("11", "19").Should().HaveLength(2).And.Be("30");
+        }
+
+        [Fact]
         public void Test_Convert_String_To_Bytes()
         {
             var calc = new CalcCore();
