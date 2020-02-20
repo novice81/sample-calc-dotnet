@@ -23,10 +23,15 @@ namespace SampleCalc.Core
             for (var i = 0; i < digitLength; ++i)
             {
                 digitsSum[digitLength - i - 1] = 
-                        (byte)(digitsLh[digitLength - i - 1] + digitsRh[digitLength - i - 1]);
+                        (byte)Plus(digitsLh[digitLength - i - 1], digitsRh[digitLength - i - 1]);
             }
 
             return digitsSum;
+        }
+
+        public byte Plus(byte digitLh, byte digitRh)
+        {
+            return digitLg + digitRh;
         }
 
         public byte[] ConvertToBytes(string number)
