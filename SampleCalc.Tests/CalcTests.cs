@@ -32,7 +32,7 @@ namespace SampleCalc.Tests
         {
             var calc = new CalcCore();
 
-            calc.Plus("11", "19").Should().HaveLength(2).And.Be("30");
+            calc.Plus(calc.ConvertToBytes("1"), calc.ConvertToBytes("9")).Should().HaveCount(2).And.Equal(1, 0);
         }
 
         [Fact]
