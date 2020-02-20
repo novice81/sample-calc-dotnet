@@ -16,13 +16,13 @@ namespace SampleCalc.Tests
             {
                 for (int rh = 0; rh < 10; ++rh)
                 {
-                    if (lh + rh > 10)
+                    if (lh + rh >= 10)
                     {
                         continue;
                     }
 
                     // Test only that sum is still single digit
-                    calc.Plus(lh.ToString(), rh.ToString()).Should().Be((lh + rh).ToString());
+                    calc.Plus(lh.ToString(), rh.ToString()).Should().HaveLength(1).And.Be((lh + rh).ToString());
                 }
             }
         }
