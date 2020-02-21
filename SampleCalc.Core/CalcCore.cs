@@ -93,6 +93,11 @@ namespace SampleCalc.Core
                 stringBuilder.Append(number[i]);
             }
 
+            if (stringBuilder.Length == 0)
+            {
+                stringBuilder.Append("0");
+            }
+
             return stringBuilder.ToString();
         }
     }
