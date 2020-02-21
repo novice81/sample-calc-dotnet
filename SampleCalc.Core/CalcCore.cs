@@ -76,8 +76,20 @@ namespace SampleCalc.Core
         {
             var stringBuilder = new StringBuilder();
 
+            var firstZeroTrimmed = false;
+
             for (int i = 0; i < number.Length; ++i)
             {
+                if (number[i] != 0)
+                {
+                    firstZeroTrimmed = true;
+                }
+
+                if (firstZeroTrimmed == false)
+                {
+                    continue;
+                }
+
                 stringBuilder.Append(number[i]);
             }
 
