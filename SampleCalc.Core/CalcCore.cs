@@ -11,7 +11,7 @@ namespace SampleCalc.Core
             public byte Carry { get; set; }
         }
 
-        public string Plus(string lh, string rh)
+        public static string Plus(string lh, string rh)
         {
             var digitsLh = ConvertToBytes(lh);
             var digitsRh = ConvertToBytes(rh);
@@ -21,7 +21,7 @@ namespace SampleCalc.Core
             return ConvertToString(digitsSum);
         }
 
-        public byte[] Plus(byte[] digitsLh, byte[] digitsRh)
+        public static byte[] Plus(byte[] digitsLh, byte[] digitsRh)
         {
             var digitLength = Math.Max(digitsLh.Length, digitsRh.Length);
 
@@ -44,12 +44,12 @@ namespace SampleCalc.Core
             return digitsSum;
         }
 
-        public byte GetSafeNumber(byte[] array, int index)
+        public static byte GetSafeNumber(byte[] array, int index)
         {
             return (byte)((index >= array.Length || index < 0) ? 0 : array[index]);
         }
 
-        public Digit Plus(byte digitLh, byte digitRh)
+        public static Digit Plus(byte digitLh, byte digitRh)
         {
             var sum = digitLh + digitRh;
 
@@ -60,7 +60,7 @@ namespace SampleCalc.Core
             };
         }
 
-        public byte[] ConvertToBytes(string number)
+        public static byte[] ConvertToBytes(string number)
         {
             var digits = new byte[number.Length];
 
@@ -72,7 +72,7 @@ namespace SampleCalc.Core
             return digits;
         }
 
-        public string ConvertToString(byte[] number)
+        public static string ConvertToString(byte[] number)
         {
             var stringBuilder = new StringBuilder();
 
