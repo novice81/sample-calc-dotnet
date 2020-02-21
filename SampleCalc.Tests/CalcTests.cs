@@ -36,6 +36,14 @@ namespace SampleCalc.Tests
         }
 
         [Fact]
+        public void Test_Plus_DoubleDigit_Over_Carry()
+        {
+            var calc = new CalcCore();
+
+            calc.Plus("11", "99").Should().HaveLength(3).And.Be("110");
+        }
+
+        [Fact]
         public void Test_GetSafeNumber()
         {
             var calc = new CalcCore();
