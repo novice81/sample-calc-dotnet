@@ -24,14 +24,21 @@ namespace SampleCalc.Core
         public byte[] Plus(byte[] digitsLh, byte[] digitsRh)
         {
             var digitLength = Math.Max(digitsLh.Length, digitsRh.Length);
-            var digitsSum = new byte[digitLength];
-            var digitsCarry = new byte[digitLength + 1];
 
-            for (var i = 0; i < digitLength; ++i)
+            int digitsSumLength = digitLength + 1;
+            var digitsSum = new byte[digitsSumLength];
+            var digitsCarry = new byte[digitsSumLength];
+
+            for (var i = 0; i < digitsSumLength; ++i)
             {
-                var sum = Plus(digitsLh[digitLength - i - 1], digitsRh[digitLength - i - 1]);
-                digitsSum[digitLength - i - 1] = (byte)sum.Number;
-                digitsCarry[digitLength - i] = sum.Carry;
+                int reverseIndex = digitsSumLength - 1 - i;
+                var carry = GetSafeNumber(digitsCarry, reverseIndex + 1);
+
+                var sum = Plus(GetSafeNumber(digitsLh, digitLength - 1 - i), 
+                        GetSafeNumber(digitsRh, digitLength - 1 - i));
+
+                digitsSum[reverseIndex] = (byte)(sum.Number + carry);
+                digitsCarry[reverseIndex] = sum.Carry;
             }
 
             return digitsSum;
