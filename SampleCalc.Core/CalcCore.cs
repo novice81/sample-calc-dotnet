@@ -24,9 +24,7 @@ namespace SampleCalc.Core
 
         public static byte[] Plus(byte[] digitsLh, byte[] digitsRh)
         {
-            var digitLength = Math.Max(digitsLh.Length, digitsRh.Length);
-
-            int digitsSumLength = digitLength + 1;
+            int digitsSumLength = Math.Max(digitsLh.Length, digitsRh.Length) + 1;
             var digitsSum = new byte[digitsSumLength];
             var digitsCarry = new byte[digitsSumLength];
 
