@@ -40,6 +40,21 @@ namespace SampleCalc.Tests
         }
 
         [Fact]
+        public void Test_Plus_Integer_Max_Range()
+        {
+            for (long lh = int.MaxValue - 1000; lh < int.MaxValue; ++lh)
+            {
+                for (long rh = int.MaxValue - 1000; rh < int.MaxValue; ++rh)
+                {
+                    var expected = (lh + rh).ToString();
+
+                    CalcCore.Plus(lh.ToString(), rh.ToString())
+                            .Should().HaveLength(expected.Length).And.Be(expected);
+                }
+            }
+        }
+
+        [Fact]
         public void Test_GetSafeNumber()
         {
             var array = new byte[3]{ 1, 2, 3 };
