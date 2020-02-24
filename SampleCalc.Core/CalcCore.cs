@@ -39,9 +39,15 @@ namespace SampleCalc.Core
                         GetSafeNumber(digitsRh, digitsRh.Length - 1 - i));
 
                 digitsSum[reverseIndex] = (byte)(sum.Number + carry);
+                if (digitsSum[reverseIndex] >= 10)
+                {
+                    digitsSum[reverseIndex] -= 10;
+                    digitsCarry[reverseIndex] += 1;
+                }
+
                 Debug.Assert(digitsSum[reverseIndex] < 10, $"Sum[{reverseIndex}] is {digitsSum[reverseIndex]}");
 
-                digitsCarry[reverseIndex] = sum.Carry;
+                digitsCarry[reverseIndex] += sum.Carry;
             }
 
             return digitsSum;
