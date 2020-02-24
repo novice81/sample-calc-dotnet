@@ -34,8 +34,8 @@ namespace SampleCalc.Core
                 int reverseIndex = digitsSumLength - 1 - i;
                 var carry = GetSafeNumber(digitsCarry, reverseIndex + 1);
 
-                var sum = Plus(GetSafeNumber(digitsLh, digitLength - 1 - i), 
-                        GetSafeNumber(digitsRh, digitLength - 1 - i));
+                var sum = Plus(GetSafeNumber(digitsLh, digitsLh.Length - 1 - i), 
+                        GetSafeNumber(digitsRh, digitsRh.Length - 1 - i));
 
                 digitsSum[reverseIndex] = (byte)(sum.Number + carry);
                 digitsCarry[reverseIndex] = sum.Carry;

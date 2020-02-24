@@ -40,6 +40,25 @@ namespace SampleCalc.Tests
         }
 
         [Fact]
+        public void Test_Plus_To_Be_100_With_Carry()
+        {
+            for (int lh = 0; lh < 100; ++lh)
+            {
+                for (int rh = 0; rh < 100; ++rh)
+                {
+                    if (lh + rh != 100)
+                    {
+                        continue;
+                    }
+
+                    // Verify the number to be 100.
+                    CalcCore.Plus(lh.ToString(), rh.ToString())
+                            .Should().HaveLength(3).And.Be("100");
+                }
+            }
+        }
+
+        [Fact]
         public void Test_Plus_Integer_Max_Range()
         {
             for (long lh = int.MaxValue - 1000; lh < int.MaxValue; ++lh)
