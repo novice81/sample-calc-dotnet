@@ -68,9 +68,9 @@ namespace SampleCalc.Tests
         [Fact]
         public void Test_Plus_Integer_Max_Range()
         {
-            for (long lh = int.MaxValue - 1000; lh < int.MaxValue; ++lh)
+            for (long lh = int.MaxValue - 100; lh < int.MaxValue; ++lh)
             {
-                for (long rh = int.MaxValue - 1000; rh < int.MaxValue; ++rh)
+                for (long rh = int.MaxValue - 100; rh < int.MaxValue; ++rh)
                 {
                     var expected = (lh + rh).ToString();
 
@@ -78,6 +78,38 @@ namespace SampleCalc.Tests
                             .Should().HaveLength(expected.Length).And.Be(expected);
                 }
             }
+        }
+
+        [Fact]
+        public void Test_Plus_Long_Max_Range()
+        {
+            // Avoid to calculate with long.MaxValue since we don't have proper primitive data type
+            for (long lh = long.MaxValue - 100; lh < long.MaxValue / 10; ++lh)
+            {
+                for (long rh = long.MaxValue - 100; rh < long.MaxValue / 10; ++rh)
+                {
+                    var expected = (lh + rh).ToString();
+                    CalcCore.Plus(lh.ToString(), rh.ToString())
+                            .Should().HaveLength(expected.Length).And.Be(expected);
+                }
+            }
+        }
+
+        [Fact]
+        public void Test_Long_Number_With_String()
+        {
+            // 1 + 9999..... = 1000.....
+            CalcCore.Plus("1", new string('9', 100))
+                    .Should().HaveLength(101).And.Be("1" + new string('0', 100));
+
+            // 1111..... + 9999..... = 1111.....0
+            CalcCore.Plus(new string('1', 100), new string('9', 100))
+                    .Should().HaveLength(101).And.Be(new string('1', 100) + '0');
+
+            // $ python -c "print(191723695817263958716239576136561298375698172365 + 70287987198237409128730498172038471028374213784)"
+            // 262011683015501367844970074308599769404072386149
+            CalcCore.Plus("191723695817263958716239576136561298375698172365", "70287987198237409128730498172038471028374213784")
+                    .Should().HaveLength(48).And.Be("262011683015501367844970074308599769404072386149");
         }
 
         [Fact]
