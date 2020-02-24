@@ -59,6 +59,13 @@ namespace SampleCalc.Tests
         }
 
         [Fact]
+        public void Test_Plus_To_Be_200_With_The_Number_Make_10_With_Carry()
+        {
+            // Verify the number to be 200.
+            CalcCore.Plus("101", "99").Should().HaveLength(3).And.Be("200");
+        }
+
+        [Fact]
         public void Test_Plus_Integer_Max_Range()
         {
             for (long lh = int.MaxValue - 1000; lh < int.MaxValue; ++lh)

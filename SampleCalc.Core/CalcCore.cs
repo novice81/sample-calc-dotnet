@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Diagnostics;
 
 namespace SampleCalc.Core
 {
@@ -38,6 +39,8 @@ namespace SampleCalc.Core
                         GetSafeNumber(digitsRh, digitsRh.Length - 1 - i));
 
                 digitsSum[reverseIndex] = (byte)(sum.Number + carry);
+                Debug.Assert(digitsSum[reverseIndex] < 10, $"Sum[{reverseIndex}] is {digitsSum[reverseIndex]}");
+
                 digitsCarry[reverseIndex] = sum.Carry;
             }
 
@@ -51,6 +54,9 @@ namespace SampleCalc.Core
 
         public static Digit Plus(byte digitLh, byte digitRh)
         {
+            Debug.Assert(digitLh < 10, $"Wrong lh : {digitLh}");
+            Debug.Assert(digitRh < 10, $"Wrong rh : {digitRh}");
+
             var sum = digitLh + digitRh;
 
             return new Digit 
